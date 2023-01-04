@@ -275,3 +275,13 @@ their partition indices.
 .. _s3: https://aws.amazon.com/s3/
 .. _gcs: https://cloud.google.com/storage
 .. _AWS credentials file: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#shared-credentials-file>`_.
+
+Compression
+~~~~~~~~~~~
+
+:func:`to_parquet` accepts ``compression`` to specify the compression codec,
+and ``storage_options`` to control the engines compression options.
+
+.. code-block:: Python
+
+   >>> df.to_parquet("/path/to/output", compression="zstd", storage_options={"compression_level": 1})
