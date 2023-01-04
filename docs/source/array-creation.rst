@@ -457,6 +457,16 @@ or your own custom zarr Array:
    >>> z = zarr.create((10,), dtype=float, store=zarr.ZipStore("output.zarr"))
    >>> arr.to_zarr(z)
 
+A separate package called `Numcodecs <https://numcodecs.readthedocs.io/en/latest/>`_
+contains various compressor and filter classes that can be used with Zarr. A Numcodecs 
+codec class can be used as a compressor for a Zarr array:
+
+.. code-block:: Python
+
+   >>> from numcodecs import Blosc
+   >>> compressor = Blosc(cname='zstd', clevel=1)
+   >>> arr.to_zarr('output.zarr', storage_options={"compressor": compressor})
+
 To retrieve those data, you would do ``da.from_zarr`` with exactly the same arguments. The
 chunking of the resultant Dask array is defined by how the files were saved, unless
 otherwise specified.
